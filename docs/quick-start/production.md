@@ -153,7 +153,7 @@ It's possible to override some django settings by special config file named prod
 production.yml:
 
     SECURE_PROXY_SSL_HEADER: !!python/tuple ['HTTP_X_FORWARDED_PROTO', 'https']
-    ALLOWED_HOSTS: [''.example.com']
+    ALLOWED_HOSTS: ['example.com']
 
 
 Troubleshooting
