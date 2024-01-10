@@ -98,7 +98,7 @@ For modern OS we use Systemd service for mange UWsgi. Create service file /lib/s
     After=network.target
 
     [Service]
-    ExecStart=//home/vagrant/prod-env/bin/uwsgi --env DJANGO_SETTINGS_MODULE=vaas.settings --uid vagrant --master --processes 8 --die-on-term --socket /tmp/vaas.sock -H /home/vagrant/prod-env --module vaas.external.wsgi --chmod-socket=666 --logto /tmp/uwsgi.log
+    ExecStart=service vaas start
     Restart=on-failure
     Type=notify
 
