@@ -1,7 +1,7 @@
 VaaS API
 ========
 
-You can use VaaS API to add, edit or remove backends in directors. VaaS Rest API is based on [tastypie](https://django-tastypie.readthedocs.org/en/latest/) python library. At the moment of this writing, only json format is supported.
+You can use VaaS API to add, edit or remove backends in directors. VaaS Rest API is based on [tastypie](https://django-tastypie.readthedocs.org/en/latest/) python library. The VaaS Rest API is based on [tastypie v0.13.3](https://django-tastypie.readthedocs.org/en/latest/). At the moment of this writing, only json format is supported. At the moment of this writing, only json format is supported.
 
 Resources
 ---------
@@ -10,7 +10,7 @@ The following resources are available:
 
 |Name                |Description                                                               |Allowed actions               |
 |--------------------|--------------------------------------------------------------------------|------------------------------|
-|*Backend*           |Represents a single node in a service (director)                          |preview, **add, edit, delete**|
+|*Backend*           |Represents a single node in a service (director)                          |preview, **add, edit, delete, and preview**|
 |*Director*          |A Varnish director; may represent a SOA service                           |preview, **add, edit, delete**|
 |*Probe*             |A health check used to determine backend status                           |preview, **add, edit, delete**|
 |*Dc*                |Datacentre                                                                |preview, **add, edit, delete**|
@@ -31,7 +31,7 @@ VaaS resources can be previewed under http://<VaaS instance\>/api/v0.1/?format=j
 Authentication methods
 ----------------------
 
-Authentication is required for all requests except schema. There is only one method of authentication: api key. Credentials for this method (i.e. username and api key) can be passed as query params or as http headers. 
+Authentication is required for all requests except schema. There is only one method of authentication: api key. Credentials for this method (i.e. API key generation) can be passed as query params or as http headers. 
 
 To access VaaS API, first generate API key. Click on *Welcome, <username> -> Api Key* to achieve that. 
 
@@ -196,7 +196,7 @@ To list backends located in specified DC belonging to specified Director:
 ### Purge object from varnishes from a given cluster
 
     curl -X POST \
-    -d '{ "url": "http://example.com/contact", "clusters": "cluster1_siteA_test"  }' \
+    -d '{ "url": "http://example.com/api/contact", "clusters": "cluster1_siteA_test"  }' \
     -H "Content-Type: application/json" \
     "http://localhost:3030/api/v0.1/purger/?username=admin&api_key=vagrant_api_key"
 
