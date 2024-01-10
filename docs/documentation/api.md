@@ -61,7 +61,7 @@ To list backends located in specified DC belonging to specified Director:
 ### Create a new DC
 
     curl -X POST \
-    -d '{ "name": "dc1", "symbol": "dc1" }' \
+    -d '{ "name": "desired_dc_name", "symbol": "desired_dc_symbol" }' \
     -H "Content-Type: application/json" \
     "http://localhost:3030/api/v0.1/dc/?username=admin&api_key=vagrant_api_key" 
 
