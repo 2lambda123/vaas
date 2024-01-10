@@ -36,7 +36,7 @@ Use the commands below to install VaaS package built in the previous step on a w
     pip install --upgrade pip
     pip install python-ldap==3.2.0
     pip install django-auth-ldap==1.7.0
-    pip install mysqlclient==1.4.2.post1
+    sudo apt-get install mysql-server
     pip install lck.django
     pip install uwsgi
     pip install vaas-1.2.3.zip
