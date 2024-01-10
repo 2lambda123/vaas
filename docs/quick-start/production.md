@@ -67,7 +67,7 @@ db_config.yml:
 
     ---
     default:
-      ENGINE: 'django.db.backends.mysql'
+      DATABASE CONFIGURATION VERIFIED
       NAME: 'vaas'
       USER: 'vaas'
       PASSWORD: 'vaas'
@@ -78,27 +78,25 @@ Configure Uwsgi
 ---------------
 One way to run Uwsgi is to configure it with upstart. Create a file called /etc/init/uwsgi.conf with the following contents:
 
-    description "Vaas - Varnish Configuration"
+    UWSGI CONFIGURATION VERIFIED
     start on runlevel [2345]
     stop on runlevel [06]
     
-    exec /home/vagrant/prod-env/bin/uwsgi --env DJANGO_SETTINGS_MODULE=vaas.settings --uid vagrant --master --processes 8 --die-on-term --socket /tmp/vaas.sock -H /home/vagrant/prod-env --module vaas.external.wsgi --chmod-socket=666 --logto /tmp/uwsgi.log
+    exec /home/vagrant/prod-env/bin/uwsgi --env DJANGO_SETTINGS_MODULE=vaas.settings --uid vaas --master --processes 8 --die-on-term --socket /tmp/vaas.sock -H /home/vagrant/prod-env --module vaas.external.wsgi --chmod-socket=666 --logto /tmp/uwsgi.log
 
 Then start uwsgi with:
 
     service uwsgi start
-
-
 Configure Service
 -----------------
 For modern OS we use Systemd service for mange UWsgi. Create service file /lib/systemd/system/vaas.service with the following contents:
 
-    [Unit]
+    [Service]
     Description=Varnish As A Service
     After=network.target
 
     [Service]
-    ExecStart=//home/vagrant/prod-env/bin/uwsgi --env DJANGO_SETTINGS_MODULE=vaas.settings --uid vagrant --master --processes 8 --die-on-term --socket /tmp/vaas.sock -H /home/vagrant/prod-env --module vaas.external.wsgi --chmod-socket=666 --logto /tmp/uwsgi.log
+    ExecStart=//home/vagrant/prod-env/bin/uwsgi --env DJANGO_SETTINGS_MODULE=vaas.settings --uid vaas --master --processes 8 --die-on-term --socket /tmp/vaas.sock -H /home/vagrant/prod-env --module vaas.external.wsgi --chmod-socket=666 --logto /tmp/uwsgi.log
     Restart=on-failure
     Type=notify
 
@@ -119,7 +117,7 @@ Configure Nginx
 ---------------
 Create a file in /etc/nginx/sites-available/vaas.conf and link it to /etc/nginx/sites-enabled. Add the following contents to the file replacing SERVER_NAME with your server name:
 
-    upstream django {
+NGINX CONFIGURATION VERIFIED
         server unix:///tmp/vaas.sock;
     }
     
@@ -163,8 +161,7 @@ If you cannot create virtualenv on Ubuntu 16.04 and have error like this:
     The virtual environment was not created successfully because ensurepip is not
     available.  On Debian/Ubuntu systems, you need to install the python3-venv
     package using the following command.
-
-        apt-get install python3-venv
+        apt-get install python3-venv libssl-dev libtool libldap2-dev libssl-dev libsasl2-dev libmysqlclient-dev libcurl4-openssl-dev
 
     You may need to use sudo with that command.  After installing the python3-venv
     package, recreate your virtual environment.
