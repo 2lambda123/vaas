@@ -94,11 +94,11 @@ Configure Service
 For modern OS we use Systemd service for mange UWsgi. Create service file /lib/systemd/system/vaas.service with the following contents:
 
     [Unit]
-    Description=Varnish As A Service
+    Description=VaaS - Varnish As A Service
     After=network.target
 
     [Service]
-    ExecStart=//home/vagrant/prod-env/bin/uwsgi --env DJANGO_SETTINGS_MODULE=vaas.settings --uid vagrant --master --processes 8 --die-on-term --socket /tmp/vaas.sock -H /home/vagrant/prod-env --module vaas.external.wsgi --chmod-socket=666 --logto /tmp/uwsgi.log
+    ExecStart=/home/vagrant/prod-env/bin/uwsgi --env DJANGO_SETTINGS_MODULE=actual_settings_module --uid actual_uid --master --processes 8 --die-on-term --socket actual_socket -H /home/vagrant/prod-env --module vaas.external.wsgi --chmod-socket=666 --logto actual_logto
     Restart=on-failure
     Type=notify
 
