@@ -31,7 +31,13 @@ Install VaaS package
 --------------------
 Use the commands below to install VaaS package built in the previous step on a web server:
 
-    python3.5 -m venv prod-env
+    sudo apt-get install python3-venv
+
+Recreate the virtual environment:
+
+```bash
+python3.5 -m venv prod-env
+```
     . prod-env/bin/activate
     pip install --upgrade pip
     pip install python-ldap==3.2.0
@@ -171,6 +177,12 @@ If you cannot create virtualenv on Ubuntu 16.04 and have error like this:
 
         apt-get install python3-venv
 
+Recreate the virtual environment:
+
+```bash
+python3.5 -m venv dist-venv
+```
+
     You may need to use sudo with that command.  After installing the python3-venv
     package, recreate your virtual environment.
 
@@ -178,8 +190,7 @@ If you cannot create virtualenv on Ubuntu 16.04 and have error like this:
 
 You need to update your locale. For example:
 
-    export LC_ALL="en_US.UTF-8"
-    export LC_CTYPE="en_US.UTF-8"
-    sudo dpkg-reconfigure locales
+    sudo locale-gen en_US.UTF-8
+sudo update-locale LANG=en_US.UTF-8
 
 After that commend ```sudo python3.5 -m venv dist-venv``` will work properly.
