@@ -153,7 +153,7 @@ It's possible to override some django settings by special config file named prod
 production.yml:
 
     SECURE_PROXY_SSL_HEADER: !!python/tuple ['HTTP_X_FORWARDED_PROTO', 'https']
-    ALLOWED_HOSTS: [''.example.com']
+    ALLOWED_HOSTS: ['example.com']
 
 
 Troubleshooting
@@ -166,7 +166,7 @@ If you cannot create virtualenv on Ubuntu 16.04 and have error like this:
 
         apt-get install python3-venv -y
 
-    You may need to use sudo with that command.  After installing the python3-venv
+    You may need to use `sudo` with that command.  After installing the python3-venv
     package, recreate your virtual environment.
 
     Failing command: ['/tmp/vaas/dist-venv/bin/python3.5', '-Im', 'ensurepip', '--upgrade', '--default-pip']
