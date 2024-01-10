@@ -71,18 +71,18 @@ db_config.yml:
       NAME: 'vaas'
       USER: 'vaas'
       PASSWORD: 'vaas'
-      HOST: 'mysql.hostname'
+      HOST: 'actual_mysql_hostname'
 
 
 Configure Uwsgi
 ---------------
 One way to run Uwsgi is to configure it with upstart. Create a file called /etc/init/uwsgi.conf with the following contents:
 
-    description "Vaas - Varnish Configuration"
+    description "VaaS - Uwsgi Configuration"
     start on runlevel [2345]
     stop on runlevel [06]
     
-    exec /home/vagrant/prod-env/bin/uwsgi --env DJANGO_SETTINGS_MODULE=vaas.settings --uid vagrant --master --processes 8 --die-on-term --socket /tmp/vaas.sock -H /home/vagrant/prod-env --module vaas.external.wsgi --chmod-socket=666 --logto /tmp/uwsgi.log
+    exec /home/ubuntu/prod-env/bin/uwsgi --env DJANGO_SETTINGS_MODULE=vaas.settings --uid vagrant --master --processes 8 --die-on-term --socket /tmp/vaas.sock -H /home/ubuntu/prod-env --module vaas.wsgi --chmod-socket=666 --logto /var/log/uwsgi.log
 
 Then start uwsgi with:
 
@@ -91,14 +91,14 @@ Then start uwsgi with:
 
 Configure Service
 -----------------
-For modern OS we use Systemd service for mange UWsgi. Create service file /lib/systemd/system/vaas.service with the following contents:
+For modern OS we use Systemd service for mange UWsgi. Create service file /lib/systemd/system/vaas_uwsgi.service with the following contents:
 
     [Unit]
     Description=Varnish As A Service
     After=network.target
 
     [Service]
-    ExecStart=//home/vagrant/prod-env/bin/uwsgi --env DJANGO_SETTINGS_MODULE=vaas.settings --uid vagrant --master --processes 8 --die-on-term --socket /tmp/vaas.sock -H /home/vagrant/prod-env --module vaas.external.wsgi --chmod-socket=666 --logto /tmp/uwsgi.log
+    ExecStart=//home/ubuntu/prod-env/bin/uwsgi --env DJANGO_SETTINGS_MODULE=vaas.settings --uid vagrant --master --processes 8 --die-on-term --socket /tmp/vaas.sock -H /home/vagrant/prod-env --module vaas.external.wsgi --chmod-socket=666 --logto /tmp/uwsgi.log
     Restart=on-failure
     Type=notify
 
@@ -115,7 +115,7 @@ Run VaaS:
     service vaas start
 
 
-Configure Nginx
+Configure Nginx (Modifying Nginx Configuration)
 ---------------
 Create a file in /etc/nginx/sites-available/vaas.conf and link it to /etc/nginx/sites-enabled. Add the following contents to the file replacing SERVER_NAME with your server name:
 
