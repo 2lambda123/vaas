@@ -170,7 +170,7 @@ If you cannot create virtualenv on Ubuntu 16.04 and have error like this:
     available.  On Debian/Ubuntu systems, you need to install the python3-venv
     package using the following command.
 
-        apt-get install python3-venv
+        apt-get install python3.8-venv
 
     You may need to use sudo with that command.  After installing the python3-venv
     package, recreate your virtual environment.
@@ -180,7 +180,7 @@ If you cannot create virtualenv on Ubuntu 16.04 and have error like this:
 You need to update your locale. For example:
 
     export LC_ALL="en_US.UTF-8"
-    export LC_CTYPE="en_US.UTF-8"
-    sudo dpkg-reconfigure locales
+export LC_CTYPE="en_US.UTF-8"
+sudo dpkg-reconfigure locales
 
 After that commend ```sudo python3.5 -m venv dist-venv``` will work properly.
