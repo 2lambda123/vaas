@@ -31,7 +31,7 @@ VaaS resources can be previewed under http://<VaaS instance\>/api/v0.1/?format=j
 Authentication methods
 ----------------------
 
-Authentication is required for all requests except schema. There is only one method of authentication: api key. Credentials for this method (i.e. username and api key) can be passed as query params or as http headers. 
+To access VaaS API, first generate an API key by clicking on *Welcome, <username> -> Api Key*. Once you have the API key, you can use it by passing it as a query param or as an http header in the API requests. 
 
 To access VaaS API, first generate API key. Click on *Welcome, <username> -> Api Key* to achieve that. 
 
