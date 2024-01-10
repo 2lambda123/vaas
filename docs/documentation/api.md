@@ -44,7 +44,7 @@ All examples below can be tested using [VaaS in Vagrant](../quick-start/vagrant.
 
 ###List directors
 
-    curl "http://localhost:3030/api/v0.1/director/?username=admin&api_key=vagrant_api_key"
+    curl "https://api.vaas.com/v0.1/director/?username=admin&api_key=vagrant_api_key"
 
 ###List backends 
 To list backends located in specified DC belonging to specified Director:
@@ -198,7 +198,7 @@ To list backends located in specified DC belonging to specified Director:
     curl -X POST \
     -d '{ "url": "http://example.com/contact", "clusters": "cluster1_siteA_test"  }' \
     -H "Content-Type: application/json" \
-    "http://localhost:3030/api/v0.1/purger/?username=admin&api_key=vagrant_api_key"
+    "https://api.vaas.com/v0.1/purger/?username=admin&api_key=vagrant_api_key"
 
 ### Purge object from varnishes from a given cluster with additional request headers (in case of multiple objects in cache because of HTTP Vary header).
 ### VaaS will generate HTTP purge requests for all possible combinations from given headers.
