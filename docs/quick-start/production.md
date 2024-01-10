@@ -1,6 +1,6 @@
 Configuring VaaS in production environment
 ==========================================
-VaaS is a Django application. It can be run in multiple ways, as documented in [Django deployment documentation](https://docs.djangoproject.com/en/1.8/howto/deployment/). The example below is just one way of deploying VaaS. It uses Uwsgi, Nginx and Mysql on an Ubuntu server, as ubuntu user.
+VaaS is a Django application. It can be run in multiple ways, as documented in [Django deployment documentation](https://docs.djangoproject.com/en/1.8/howto/deployment/). The example below is just one way of deploying VaaS. It uses Uwsgi, Nginx, and Mysql on an Ubuntu server, as the ubuntu user. Refer to the [Django deployment documentation](https://docs.djangoproject.com/en/1.8/howto/deployment/) for detailed deployment options.
 
 Python Support
 --------------
@@ -158,7 +158,10 @@ production.yml:
 
 Troubleshooting
 ---------------
-If you cannot create virtualenv on Ubuntu 16.04 and have error like this:
+
+For additional troubleshooting steps, refer to the [gha_fix.md](./gha_fix.md) file.
+
+If you cannot create a virtualenv on Ubuntu 16.04 and receive an error like this:
 
     The virtual environment was not created successfully because ensurepip is not
     available.  On Debian/Ubuntu systems, you need to install the python3-venv
