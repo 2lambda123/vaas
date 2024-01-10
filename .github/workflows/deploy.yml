@@ -112,11 +112,24 @@ jobs:
           pip install -r src/vaas.egg-info/requires.txt
           python setup.py sdist --format=zip
 
-      - name: Install VaaS dependencies
+      - name: Install VaaS package
         run: |
           python3.5 -m venv prod-env
           . prod-env/bin/activate
           pip install --upgrade pip
+          pip install python-ldap==3.2.0
+          pip install django-auth-ldap==1.7.0
+          pip install mysqlclient==1.4.2.post1
+          pip install lck.django
+          pip install uwsgi
+          pip install vaas-{version-number}.zip
+          pip install --upgrade pip
+          pip install python-ldap==3.2.0
+          pip install django-auth-ldap==1.7.0
+          pip install mysqlclient==1.4.2.post1
+          pip install lck.django
+          pip install uwsgi
+          pip install vaas-{version-number}.zip
           pip install python-ldap==3.2.0
           pip install django-auth-ldap==1.7.0
           pip install mysqlclient==1.4.2.post1
