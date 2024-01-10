@@ -1,4 +1,4 @@
-VaaS in Vagrant
+Deploying VaaS in Vagrant
 ===============
 VaaS in Vagrant is a preconfigured VaaS application instance packed into a Vagrant box. It is useful for experimentation, testing and development purposes. The box runs the following services:
 
@@ -23,7 +23,7 @@ Point your browser to <http://localhost:3030/> and log in using the following cr
     User: admin
     Password: admin
 
-You will see a django admin GUI with two apps: Cluster and Manager. Configure your sample Varnish servers and VCL templates in Cluster app. Configure your backends, directors and probes in the Manager app. Refer to [GUI](../documentation/gui.md) or [API](../documentation/api.md) documentation to see how to do this.
+You will see a django admin GUI with two apps: Cluster and Manager. Configure your sample Varnish servers and VCL templates in Cluster app. Configure your backends, directors and probes in the Manager app. Refer to [GUI](../documentation/gui.md) or [API](../documentation/api.md) or refer to [gha_fix.md](./gha_fix.md) for additional troubleshooting steps. documentation to see how to do this.
 
 Current VCL for the test Varnish instances can be previewed by clicking on Cluster -> Varnish servers -> Show vcl. HINT: Freshly after booting up VaaS in Vagrant, the configuration of the Varnish servers will not be loaded. Make some changes to the test backends or re-enable the test Varnish instances to trigger loading of the configuration.
 
