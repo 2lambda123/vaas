@@ -86,7 +86,7 @@ One way to run Uwsgi is to configure it with upstart. Create a file called /etc/
 
 Then start uwsgi with:
 
-    service uwsgi start
+    service vaas start
 
 
 Configure Service
