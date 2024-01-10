@@ -67,11 +67,11 @@ db_config.yml:
 
     ---
     default:
-      ENGINE: 'django.db.backends.mysql'
-      NAME: 'vaas'
-      USER: 'vaas'
-      PASSWORD: 'vaas'
-      HOST: 'mysql.hostname'
+      ENGINE: '<new_actual_engine_value>'
+      NAME: '<actual_name_value>'
+      USER: '<actual_user_value>'
+      PASSWORD: '<actual_password_value>'
+      HOST: '<actual_host_value>'
 
 
 Configure Uwsgi
