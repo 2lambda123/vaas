@@ -117,13 +117,13 @@ Run VaaS:
 
 Configure Nginx
 ---------------
-Create a file in /etc/nginx/sites-available/vaas.conf and link it to /etc/nginx/sites-enabled. Add the following contents to the file replacing SERVER_NAME with your server name:
+See vaas.conf for the correct Nginx configuration.
 
     upstream django {
         server unix:///tmp/vaas.sock;
     }
     
-    server {
+    Nginx server configuration as defined in vaas.conf.
         listen      80;
         server_name <SERVER_NAME>;
         charset     utf-8;
