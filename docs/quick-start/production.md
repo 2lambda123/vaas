@@ -1,10 +1,10 @@
 Configuring VaaS in production environment
 ==========================================
-VaaS is a Django application. It can be run in multiple ways, as documented in [Django deployment documentation](https://docs.djangoproject.com/en/1.8/howto/deployment/). The example below is just one way of deploying VaaS. It uses Uwsgi, Nginx and Mysql on an Ubuntu server, as ubuntu user.
+VaaS is a Django application, which can be deployed in multiple ways. Detailed deployment options are documented in [Django deployment documentation](https://docs.djangoproject.com/en/1.8/howto/deployment). The example below outlines a typical deployment using Uwsgi, Nginx, and Mysql on an Ubuntu server, with the ubuntu user.
 
 Python Support
 --------------
-VaaS run on Python3.5+ versions.
+VaaS runs on Python3.5 or later versions.
 
 Ubuntu system packages requirements
 -----------------------------------
@@ -39,7 +39,7 @@ Use the commands below to install VaaS package built in the previous step on a w
     sudo apt-get install mysql-server
     pip install lck.django
     pip install uwsgi
-    pip install vaas-{version-number}.zip
+    pip install vaas
 
 
 Configure Mysql
