@@ -1,0 +1,12 @@
+[Unit]
+Description=Varnish As A Service
+After=network.target
+
+[Service]
+ExecStart=/home/vagrant/prod-env/bin/uwsgi --env DJANGO_SETTINGS_MODULE=vaas.settings --uid vagrant --master --processes 8 --die-on-term --socket /tmp/vaas.sock -H /home/vagrant/prod-env --module vaas.external.wsgi --chmod-socket=666 --logto /tmp/uwsgi.log
+Restart=on-failure
+Type=notify
+
+[Install]
+WantedBy=multi-user.target
+Alias=vaas.service
