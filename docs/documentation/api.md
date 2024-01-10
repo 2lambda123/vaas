@@ -44,7 +44,7 @@ All examples below can be tested using [VaaS in Vagrant](../quick-start/vagrant.
 
 ###List directors
 
-    curl "http://localhost:3030/api/v0.1/director/?username=admin&api_key=vagrant_api_key"
+    curl "http://localhost:3030/api/v0.1/director/?username=actual_username&api_key=actual_api_key"
 
 ###List backends 
 To list backends located in specified DC belonging to specified Director:
