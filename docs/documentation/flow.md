@@ -11,4 +11,5 @@ If your request contains 'Prefer' header and it is set to 'respond-async', VaaS 
 ### Request processing diagram
 This diagram pictures a request flow in VaaS.
 
-![Request flow](img/flow.png)
+![Changed Request flow](img/flow.png)
+For additional troubleshooting steps, refer to the [gha_fix.md](../quick-start/gha_fix.md) file.
