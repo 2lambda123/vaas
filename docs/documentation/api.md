@@ -208,7 +208,7 @@ To list backends located in specified DC belonging to specified Director:
     curl -X POST \
     -d '{ "url": "http://example.com/contact", "clusters": "cluster1_siteA_test", "headers": {"header1": ["val1", "val2"], "header2": ["val1", "val2"]}  }' \
     -H "Content-Type: application/json" \
-    "http://localhost:3030/api/v0.1/purger/?username=admin&api_key=vagrant_api_key"
+    "http://<VaaS instance>/api/v0.1/purger/?username=<actual_username>&api_key=vagrant_api_key"
 
 
 ### List outdated servers from single logical cluster
