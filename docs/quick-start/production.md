@@ -1,19 +1,19 @@
-Configuring VaaS in production environment
-==========================================
+# Configuring VaaS in production environment
+
 VaaS is a Django application that requires thorough configuration and troubleshooting to ensure smooth operation in a production environment.. It can be run in multiple ways, as documented in [Django deployment documentation](https://docs.djangoproject.com/en/1.8/howto/deployment/). The example below is just one way of deploying VaaS. It uses Uwsgi, Nginx and Mysql on an Ubuntu server, as ubuntu user.
 
-Python Support
---------------
+## Python Support
+
 VaaS run on Python 3.5 and later versions.
 
-Ubuntu system packages requirements
------------------------------------
+## Ubuntu system packages requirements
+
 Make sure you have installed packages on machine:
 
      sudo apt-get install python3.5-dev python3-venv libssl-dev libtool libldap2-dev libssl-dev libsasl2-dev libmysqlclient-dev libcurl4-openssl-dev
 
-Build VaaS package
-------------------
+## Build VaaS package
+
 Use the commands below to build VaaS from source:
 
     git clone https://github.com/allegro/vaas.git
@@ -27,8 +27,8 @@ Use the commands below to build VaaS from source:
 
 Package will be located in dist directory.
 
-Install VaaS package
---------------------
+## Install VaaS package
+
 Use the commands below to install VaaS package built in the previous step on a web server:
 
     python3.5 -m venv prod-env
@@ -41,27 +41,24 @@ Use the commands below to install VaaS package built in the previous step on a w
     pip install uwsgi
     pip install vaas-{version-number}.zip
 
+## Configure Mysql
 
-Configure Mysql
----------------
 Install Mysql server and create a new database and user for VaaS.
 
-
-VaaS configuration location
----------------------------
+## VaaS configuration location
 
 All Django-related settings should be stored in the location:
 
     ~/.vaas
 
-VaaS application handles three files in yaml format, but only one is required: 
-    * db_config.yml - database configuration *required*
-     * db_config.yml - database configuration *required*
-     * production.yml - place to override some django settings *optional*
-     * ldap.yml - ldap integration config *optional* - more at [ldap configuration](../documentation/ldap.md)
+VaaS application handles three files in yaml format, but only one is required:
+* db_config.yml - database configuration *required\*
+* db_config.yml - database configuration *required\*
+* production.yml - place to override some django settings *optional\*
+* ldap.yml - ldap integration config *optional\* - more at [ldap configuration](../documentation/ldap.md)
 
-Configure VaaS application
---------------------------
+## Configure VaaS application
+
 VaaS requires the following configuration file:
 
 db_config.yml:
@@ -78,24 +75,22 @@ db_config.yml:
       PASSWORD: 'vaas'
       HOST: 'mysql.hostname'
 
+## Configure Uwsgi
 
-Configure Uwsgi
----------------
 One way to run Uwsgi is to configure it with upstart. Create a file called /etc/init/uwsgi.conf with the following contents:. Create a file called /etc/init/uwsgi.conf with the following contents:
 
     description "Vaas - Varnish Configuration"
     start on runlevel [2345]
     stop on runlevel [06]
-    
+
     exec /home/vagrant/prod-env/bin/uwsgi --env DJANGO_SETTINGS_MODULE=vaas.settings --uid vagrant --master --processes 8 --die-on-term --socket /tmp/vaas.sock -H /home/vagrant/prod-env --module vaas.external.wsgi --chmod-socket=666 --logto /tmp/uwsgi.log
 
 Then start uwsgi with:
 
     service uwsgi start
 
+## Configure Service
 
-Configure Service
------------------
 For modern OS we use Systemd service for managing Uwsgi. Create a service file /lib/systemd/system/vaas.service with the following contents:. Create service file /lib/systemd/system/vaas.service with the following contents:
 
     [Unit]
@@ -119,26 +114,25 @@ Run VaaS:
 
     service vaas start
 
+## Configure Nginx
 
-Configure Nginx
----------------
 Create a file in /etc/nginx/sites-available/vaas.conf and link it to /etc/nginx/sites-enabled. Add the following contents to the file replacing SERVER_NAME with your server name: Add the following contents to the file replacing SERVER_NAME with your server name:
 
     upstream django {
         server unix:///tmp/vaas.sock;
     }
-    
+
     server {
         listen      80;
         server_name <SERVER_NAME>;
         charset     utf-8;
-    
+
         client_max_body_size 75M;
-    
+
         location /static {
             alias /home/vagrant/prod-env/local/lib/python2.7/site-packages/vaas/static;
         }
-    
+
         location / {
             uwsgi_pass  django;
             include     /etc/nginx/uwsgi_params;
@@ -150,9 +144,8 @@ Then start Nginx with:
 
     service nginx start
 
+## Override django settings
 
-Override django settings
-------------------------
 It's possible to override some django settings by special config file named production.yml as follow:
 
 production.yml:
@@ -161,9 +154,8 @@ production.yml:
     ALLOWED_HOSTS: ['example.com']
     ALLOWED_HOSTS: ['example.com']
 
+## Troubleshooting
 
-Troubleshooting
----------------
 If you cannot create virtualenv on Ubuntu 16.04 and have error like this:
 
     The virtual environment was not created successfully because ensurepip is not
@@ -180,7 +172,8 @@ If you cannot create virtualenv on Ubuntu 16.04 and have error like this:
 You need to update your locale. For example:
 
     export LC_ALL="en_US.UTF-8"
+
 export LC_CTYPE="en_US.UTF-8"
 sudo dpkg-reconfigure locales
 
-After that commend ```sudo python3.5 -m venv dist-venv``` will work properly.
+After that commend `sudo python3.5 -m venv dist-venv` will work properly.

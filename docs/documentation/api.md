@@ -1,46 +1,42 @@
-VaaS API
-========
+# VaaS API
 
 You can use VaaS API to add, edit or remove backends in directors. VaaS Rest API is based on [tastypie](https://django-tastypie.readthedocs.org/en/latest/) python library. At the moment of this writing, only json format is supported.
 
-Resources
----------
+## Resources
 
 The following resources are available:
 
-|Name                |Description                                                               |Allowed actions               |
-|--------------------|--------------------------------------------------------------------------|------------------------------|
-|*Backend*           |Represents a single node in a service (director)                          |preview, **add, edit, delete**|
-|*Director*          |A Varnish director; may represent a SOA service                           |preview, **add, edit, delete**|
-|*Probe*             |A health check used to determine backend status                           |preview, **add, edit, delete**|
-|*Dc*                |Datacentre                                                                |preview, **add, edit, delete**|
-|*Logical Cluster*   |Cluster of Varnish servers                                                |preview, **add, edit, delete**|
-|*Varnish Servers*   |A Varnish server                                                          |preview, **add, edit, delete**|
-|*VCL Template Block*|A VCL template block                                                      |preview, **add, edit, delete**|
-|*VCL Template*      |A VCL template                                                            |preview, **add, edit, delete**|
-|*Time Profile*      |Default timeouts profile for director                                     |preview, **add, edit, delete**|
-|*Purger*            |Purge object from varnishes from a given cluster                          |                              |
-|*Outdated Server*   |Represents active varnish servers with outdated vcl                       |preview                       |
-|*Task*              |Represents state of reloading task - check [VaaS Request Flow](./flow.md) |preview                       |
-|*Route*             |Represents conditional routing to desired Director                        |preview, **add, edit, delete**|
-|*RouteConfig*       |Represents possible request parameters, operators & actions, which can be used in Routes|preview|
-|*ValidationReport*  |Represents report of positive urls validation which checks if positive urls are handled by desired Routes|preview|
+| Name                 | Description                                                                                               | Allowed actions                |
+| -------------------- | --------------------------------------------------------------------------------------------------------- | ------------------------------ |
+| _Backend_            | Represents a single node in a service (director)                                                          | preview, **add, edit, delete** |
+| _Director_           | A Varnish director; may represent a SOA service                                                           | preview, **add, edit, delete** |
+| _Probe_              | A health check used to determine backend status                                                           | preview, **add, edit, delete** |
+| _Dc_                 | Datacentre                                                                                                | preview, **add, edit, delete** |
+| _Logical Cluster_    | Cluster of Varnish servers                                                                                | preview, **add, edit, delete** |
+| _Varnish Servers_    | A Varnish server                                                                                          | preview, **add, edit, delete** |
+| _VCL Template Block_ | A VCL template block                                                                                      | preview, **add, edit, delete** |
+| _VCL Template_       | A VCL template                                                                                            | preview, **add, edit, delete** |
+| _Time Profile_       | Default timeouts profile for director                                                                     | preview, **add, edit, delete** |
+| _Purger_             | Purge object from varnishes from a given cluster                                                          |                                |
+| _Outdated Server_    | Represents active varnish servers with outdated vcl                                                       | preview                        |
+| _Task_               | Represents state of reloading task - check [VaaS Request Flow](./flow.md)                                 | preview                        |
+| _Route_              | Represents conditional routing to desired Director                                                        | preview, **add, edit, delete** |
+| _RouteConfig_        | Represents possible request parameters, operators & actions, which can be used in Routes                  | preview                        |
+| _ValidationReport_   | Represents report of positive urls validation which checks if positive urls are handled by desired Routes | preview                        |
 
 VaaS resources can be previewed under http://<VaaS instance\>/api/v0.1/?format=json
 
-Authentication methods
-----------------------
+## Authentication methods
 
-Authentication is required for all requests except schema. There is only one method of authentication: api key. Credentials for this method (i.e. username and api key) can be passed as query params or as http headers. To access VaaS API, first generate API key. Click on *Welcome, \<username\> -> Api Key* to achieve that. 
-
-![Api Key generation](img/api_change_api_key.png) 
-
-To access VaaS API, first generate API key. Click on *Welcome, <username> -> Api Key* to achieve that. 
+Authentication is required for all requests except schema. There is only one method of authentication: api key. Credentials for this method (i.e. username and api key) can be passed as query params or as http headers. To access VaaS API, first generate API key. Click on _Welcome, \<username\> -> Api Key_ to achieve that.
 
 ![Api Key generation](img/api_change_api_key.png)
 
-Sample API requests
-===================
+To access VaaS API, first generate API key. Click on _Welcome, <username> -> Api Key_ to achieve that.
+
+![Api Key generation](img/api_change_api_key.png)
+
+# Sample API requests
 
 All examples below can be tested using [VaaS in Vagrant](../quick-start/vagrant.md).
 
@@ -48,7 +44,7 @@ All examples below can be tested using [VaaS in Vagrant](../quick-start/vagrant.
 
     curl "http://<VaaS instance>/api/v0.1/director/?username=admin&api_key=<actual_api_key>"
 
-###List backends 
+###List backends
 To list backends located in specified DC belonging to specified Director:
 
     curl "http://<VaaS instance>/api/v0.1/backend/?director__name=second_service&dc__symbol=dc1&username=admin&api_key=<actual_api_key>"
@@ -58,14 +54,14 @@ To list backends located in specified DC belonging to specified Director:
     curl -X POST \
     -d '{ "name": "cluster1" }' \
     -H "Content-Type: application/json" \
-    "http://<VaaS instance>/api/v0.1/logical_cluster/?username=admin&api_key=vagrant_api_key" 
+    "http://<VaaS instance>/api/v0.1/logical_cluster/?username=admin&api_key=vagrant_api_key"
 
 ### Create a new DC
 
     curl -X POST \
     -d '{ "name": "dc1", "symbol": "dc1" }' \
     -H "Content-Type: application/json" \
-    "http://localhost:3030/api/v0.1/dc/?username=admin&api_key=vagrant_api_key" 
+    "http://localhost:3030/api/v0.1/dc/?username=admin&api_key=vagrant_api_key"
 
 ### Create a new VCL template
 
@@ -133,14 +129,12 @@ To list backends located in specified DC belonging to specified Director:
     -H "Content-Type: application/json" \
     "http://<VaaS instance>/api/v0.1/backend/1/?username=admin&api_key=vagrant_api_key"
 
-
 ### Partially update backend
 
     curl -X PATCH \
     -d '{"address": "192.168.199.33"}' \
     -H "Content-Type: application/json" \
     "http://<VaaS instance>/api/v0.1/backend/1/?username=admin&api_key=api_key_123"
-
 
 ### Create a new Varnish server
 
@@ -152,8 +146,7 @@ To list backends located in specified DC belonging to specified Director:
 ### Delete a backend
 
     curl -i -X DELETE "http://<VaaS instance>/api/v0.1/backend/1/?username=admin&api_key=vagrant_api_key"
- 
- 
+
 ### Patch a list of backends
 
     curl -X PATCH \
@@ -194,7 +187,6 @@ To list backends located in specified DC belonging to specified Director:
     -H "Content-Type: application/json" \
     "http://localhost:3030/api/v0.1/backend/?username=admin&api_key=vagrant_api_key"
 
-
 ### Purge object from varnishes from a given cluster
 
     curl -X POST \
@@ -203,6 +195,7 @@ To list backends located in specified DC belonging to specified Director:
     "http://<VaaS instance>/api/v0.1/purger/?username=admin&api_key=vagrant_api_key"
 
 ### Purge object from varnishes from a given cluster with additional request headers (in case of multiple objects in cache because of HTTP Vary header).
+
 ### VaaS will generate HTTP purge requests for all possible combinations from given headers.
 
     curl -X POST \
@@ -210,11 +203,9 @@ To list backends located in specified DC belonging to specified Director:
     -H "Content-Type: application/json" \
     "http://<VaaS instance>/api/v0.1/purger/?username=user123&api_key=vagrant_api_key"
 
-
 ### List outdated servers from single logical cluster
 
     curl "http://localhost:3030/api/v0.1/outdated_server/?username=admin&api_key=vagrant_api_key&cluster=clusterA"
-
 
 ### Asynchronous create a new Backend and add it to a Director, check reload status
 
@@ -230,7 +221,6 @@ To list backends located in specified DC belonging to specified Director:
     ...
 
     curl -i "http://localhost:3030/api/v0.1/task/578d87b6-4dd5-4786-961d-4b3717e616c8/?username=admin&api_key=vagrant_api_key"
-
 
 ### List routes
 
@@ -264,7 +254,7 @@ To list backends located in specified DC belonging to specified Director:
     curl -XPOST "http://localhost:3030/api/v0.1/validate_routes/?username=admin&api_key=admin_api_key&format=json"  -H'Content-Type: application/json' -d'{}'
 
 Above request is asynchronous, it means all checks are verified in background.
-Response contains *Location* header which provides url to validation report.
+Response contains _Location_ header which provides url to validation report.
 Report will be available after validation is finished.
 
 ### Fetch positive url validation report
@@ -275,7 +265,6 @@ If report is available, field status will be set to "SUCCESS".
 Otherwise, please try again in a moment.
 The validation report is available for 500 seconds after its ready.
 
-Explore more
-============
+# Explore more
 
 Detailed information about interaction with api based on tastypie can be found [here](http://django-tastypie.readthedocs.io/en/latest/interacting.html).
