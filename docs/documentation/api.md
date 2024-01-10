@@ -75,7 +75,7 @@ To list backends located in specified DC belonging to specified Director:
 ### Create a new Probe
 
     curl -X POST \
-    -d '{ "name": "probe1", "url": "/ts.1", "expected_response": "200" }' \
+    -d '{ "name": "desired_probe_name", "url": "/desired_url", "expected_response": "desired_response_code" }' \
     -H "Content-Type: application/json" \
     "http://localhost:3030/api/v0.1/probe/?username=admin&api_key=vagrant_api_key"
 
