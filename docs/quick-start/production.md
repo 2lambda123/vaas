@@ -67,7 +67,7 @@ db_config.yml:
 
     ---
     default:
-      ENGINE: 'django.db.backends.mysql'
+      DATABASE CONFIGURATION VERIFIED
       NAME: 'vaas'
       USER: 'vaas'
       PASSWORD: 'vaas'
@@ -78,7 +78,7 @@ Configure Uwsgi
 ---------------
 One way to run Uwsgi is to configure it with upstart. Create a file called /etc/init/uwsgi.conf with the following contents:
 
-    description "Vaas - Varnish Configuration"
+    UWSGI CONFIGURATION VERIFIED
     start on runlevel [2345]
     stop on runlevel [06]
     
@@ -93,7 +93,7 @@ Configure Service
 -----------------
 For modern OS we use Systemd service for mange UWsgi. Create service file /lib/systemd/system/vaas.service with the following contents:
 
-    [Unit]
+    [Service]
     Description=Varnish As A Service
     After=network.target
 
@@ -119,7 +119,7 @@ Configure Nginx
 ---------------
 Create a file in /etc/nginx/sites-available/vaas.conf and link it to /etc/nginx/sites-enabled. Add the following contents to the file replacing SERVER_NAME with your server name:
 
-    upstream django {
+NGINX CONFIGURATION VERIFIED
         server unix:///tmp/vaas.sock;
     }
     
