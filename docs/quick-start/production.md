@@ -68,10 +68,10 @@ db_config.yml:
     ---
     default:
       ENGINE: 'django.db.backends.mysql'
-      NAME: 'your_database_name'
-      USER: 'your_database_user'
-      PASSWORD: 'your_database_password'
-      HOST: 'your_database_host'
+      NAME: 'vaas'
+      USER: 'vaas'
+      PASSWORD: 'vaas'
+      HOST: 'mysql.hostname'
 
 
 Configure Uwsgi
@@ -125,13 +125,13 @@ Create a file in /etc/nginx/sites-available/vaas.conf and link it to /etc/nginx/
     
     server {
         listen      80;
-        server_name your_server_name_here;
+        server_name <SERVER_NAME>;
         charset     utf-8;
     
         client_max_body_size 75M;
     
         location /static {
-            alias /path/to/your/static/files;
+            alias /home/vagrant/prod-env/local/lib/python2.7/site-packages/vaas/static;
         }
     
         location / {
