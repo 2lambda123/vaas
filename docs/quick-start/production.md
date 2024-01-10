@@ -20,10 +20,10 @@ Use the commands below to build VaaS from source:
     python3.5 -m venv dist-env
     . dist-env/bin/activate
     pip install --upgrade pip
-    cd vaas/vaas-app
-    python setup.py egg_info
-    pip install -r src/vaas.egg-info/requires.txt
-    python setup.py sdist --format=zip
+production.yml:
+
+SECURE_PROXY_SSL_HEADER: !!python/tuple ['HTTP_X_FORWARDED_PROTO', 'https']
+ALLOWED_HOSTS: [''.example.com']
 
 Package will be located in dist directory.
 
