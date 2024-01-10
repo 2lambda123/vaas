@@ -1,6 +1,6 @@
 Configuring VaaS in production environment
 ==========================================
-VaaS is a Django application. It can be run in multiple ways, as documented in [Django deployment documentation](https://docs.djangoproject.com/en/1.8/howto/deployment/). The example below is just one way of deploying VaaS. It uses Uwsgi, Nginx and Mysql on an Ubuntu server, as ubuntu user.
+VaaS is a Django application that requires thorough configuration and troubleshooting to ensure smooth operation in a production environment.. It can be run in multiple ways, as documented in [Django deployment documentation](https://docs.djangoproject.com/en/1.8/howto/deployment/). The example below is just one way of deploying VaaS. It uses Uwsgi, Nginx and Mysql on an Ubuntu server, as ubuntu user.
 
 Python Support
 --------------
@@ -36,7 +36,7 @@ Use the commands below to install VaaS package built in the previous step on a w
     pip install --upgrade pip
     pip install python-ldap==3.2.0
     pip install django-auth-ldap==1.7.0
-    pip install mysqlclient==1.4.2.post1
+    sudo apt-get install mysql-server
     pip install lck.django
     pip install uwsgi
     pip install vaas-{version-number}.zip
@@ -50,11 +50,12 @@ Install Mysql server and create a new database and user for VaaS.
 VaaS configuration location
 ---------------------------
 
-All django related settings should be stored in location
+All Django-related settings should be stored in the location:
 
     ~/.vaas
 
-VaaS application handles three files in yaml format, but only one is required:
+VaaS application handles three files in yaml format, but only one is required: 
+    * db_config.yml - database configuration *required*
      * db_config.yml - database configuration *required*
      * production.yml - place to override some django settings *optional*
      * ldap.yml - ldap integration config *optional* - more at [ldap configuration](../documentation/ldap.md)
@@ -68,6 +69,10 @@ db_config.yml:
     ---
     default:
       ENGINE: 'django.db.backends.mysql'
+        NAME: 'vaas'
+        USER: 'vaas'
+        PASSWORD: 'vaas'
+        HOST: 'mysql.hostname'
       NAME: 'vaas'
       USER: 'vaas'
       PASSWORD: 'vaas'
@@ -76,7 +81,7 @@ db_config.yml:
 
 Configure Uwsgi
 ---------------
-One way to run Uwsgi is to configure it with upstart. Create a file called /etc/init/uwsgi.conf with the following contents:
+One way to run Uwsgi is to configure it with upstart. Create a file called /etc/init/uwsgi.conf with the following contents:. Create a file called /etc/init/uwsgi.conf with the following contents:
 
     description "Vaas - Varnish Configuration"
     start on runlevel [2345]
@@ -91,7 +96,7 @@ Then start uwsgi with:
 
 Configure Service
 -----------------
-For modern OS we use Systemd service for mange UWsgi. Create service file /lib/systemd/system/vaas.service with the following contents:
+For modern OS we use Systemd service for managing Uwsgi. Create a service file /lib/systemd/system/vaas.service with the following contents:. Create service file /lib/systemd/system/vaas.service with the following contents:
 
     [Unit]
     Description=Varnish As A Service
@@ -117,7 +122,7 @@ Run VaaS:
 
 Configure Nginx
 ---------------
-Create a file in /etc/nginx/sites-available/vaas.conf and link it to /etc/nginx/sites-enabled. Add the following contents to the file replacing SERVER_NAME with your server name:
+Create a file in /etc/nginx/sites-available/vaas.conf and link it to /etc/nginx/sites-enabled. Add the following contents to the file replacing SERVER_NAME with your server name: Add the following contents to the file replacing SERVER_NAME with your server name:
 
     upstream django {
         server unix:///tmp/vaas.sock;
@@ -154,6 +159,7 @@ production.yml:
 
     SECURE_PROXY_SSL_HEADER: !!python/tuple ['HTTP_X_FORWARDED_PROTO', 'https']
     ALLOWED_HOSTS: ['example.com']
+    ALLOWED_HOSTS: ['example.com']
 
 
 Troubleshooting
@@ -164,7 +170,7 @@ If you cannot create virtualenv on Ubuntu 16.04 and have error like this:
     available.  On Debian/Ubuntu systems, you need to install the python3-venv
     package using the following command.
 
-        apt-get install python3-venv
+        apt-get install python3.8-venv
 
     You may need to use sudo with that command.  After installing the python3-venv
     package, recreate your virtual environment.
@@ -174,7 +180,7 @@ If you cannot create virtualenv on Ubuntu 16.04 and have error like this:
 You need to update your locale. For example:
 
     export LC_ALL="en_US.UTF-8"
-    export LC_CTYPE="en_US.UTF-8"
-    sudo dpkg-reconfigure locales
+export LC_CTYPE="en_US.UTF-8"
+sudo dpkg-reconfigure locales
 
 After that commend ```sudo python3.5 -m venv dist-venv``` will work properly.
