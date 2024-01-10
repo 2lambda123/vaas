@@ -125,7 +125,7 @@ Create a file in /etc/nginx/sites-available/vaas.conf and link it to /etc/nginx/
     
     server {
         listen      80;
-        server_name <SERVER_NAME>;
+        server_name actual_server_name;
         charset     utf-8;
     
         client_max_body_size 75M;
