@@ -20,10 +20,10 @@ Use the commands below to build VaaS from source:
     python3.5 -m venv dist-env
     . dist-env/bin/activate
     pip install --upgrade pip
-    cd vaas/vaas-app
-    python setup.py egg_info
-    pip install -r src/vaas.egg-info/requires.txt
-    python setup.py sdist --format=zip
+production.yml:
+
+SECURE_PROXY_SSL_HEADER: !!python/tuple ['HTTP_X_FORWARDED_PROTO', 'https']
+ALLOWED_HOSTS: [''.example.com']
 
 Package will be located in dist directory.
 
@@ -36,7 +36,7 @@ Use the commands below to install VaaS package built in the previous step on a w
     pip install --upgrade pip
     pip install python-ldap==3.2.0
     pip install django-auth-ldap==1.7.0
-    pip install mysqlclient==1.4.2.post1
+    sudo apt-get install mysql-server
     pip install lck.django
     pip install uwsgi
     pip install vaas-{version-number}.zip
