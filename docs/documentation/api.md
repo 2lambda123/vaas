@@ -46,12 +46,12 @@ All examples below can be tested using [VaaS in Vagrant](../quick-start/vagrant.
 
 ###List directors
 
-    curl "http://<VaaS instance>/api/v0.1/director/?username=admin&api_key=vagrant_api_key"
+    curl "http://<VaaS instance>/api/v0.1/director/?username=admin&api_key=<actual_api_key>"
 
 ###List backends 
 To list backends located in specified DC belonging to specified Director:
 
-    curl "http://<VaaS instance>/api/v0.1/backend/?director__name=second_service&dc__symbol=dc1&username=admin&api_key=vagrant_api_key"
+    curl "http://<VaaS instance>/api/v0.1/backend/?director__name=second_service&dc__symbol=dc1&username=admin&api_key=<actual_api_key>"
 
 ### Create a new Cluster
 
