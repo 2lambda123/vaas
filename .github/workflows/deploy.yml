@@ -10,7 +10,7 @@ name: VaaS Deployment Workflow
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest
+    
 
     env:
       PYTHON_VERSION: 3.5
@@ -61,7 +61,7 @@ jobs:
           pip install --upgrade pip
       - name: Install VaaS dependencies
         run: |
-          python3.5 -m venv prod-env
+              python3.5 -m venv prod-env
           . prod-env/bin/activate
           pip install --upgrade pip
           pip install python-ldap==3.2.0
@@ -73,6 +73,7 @@ jobs:
       - name: Configure Uwsgi
         run: |
           sudo cp /path/to/uwsgi.conf /etc/init/uwsgi.conf
+        sudo service uwsgi start
           sudo service uwsgi start
       - name: Configure Nginx
         run: |
@@ -82,6 +83,7 @@ jobs:
         run: |
           export LC_ALL="en_US.UTF-8"
           export LC_CTYPE="en_US.UTF-8"
+          sudo dpkg-reconfigure locales
           sudo dpkg-reconfigure locales
 
 on:
@@ -133,6 +135,13 @@ jobs:
           python setup.py egg_info
           pip install -r src/vaas.egg-info/requires.txt
           python setup.py sdist --format=zip
+          python3.5 -m venv dist-env
+          . dist-env/bin/activate
+          pip install --upgrade pip
+          cd vaas/vaas-app
+          python setup.py egg_info
+          pip install -r src/vaas.egg-info/requires.txt
+          python setup.py sdist --format=zip
 
       - name: Install VaaS package
         run: |
@@ -148,6 +157,9 @@ jobs:
           pip install django-auth-ldap==1.7.0
           pip install mysqlclient==1.4.2.post1
           pip install lck.django
+          pip install django-auth-ldap==1.7.0
+          pip install mysqlclient==1.4.2.post1
+          pip install lck.django
           pip install uwsgi
           pip install vaas-{version-number}.zip
           pip install lck.django
@@ -163,8 +175,8 @@ jobs:
           pip install python-ldap==3.2.0
           pip install django-auth-ldap==1.7.0
           pip install mysqlclient==1.4.2.post1
-          pip install lck.django
           pip install uwsgi
+          pip install vaas-{version-number}.zip
           pip install vaas-{version-number}.zip
           pip install --upgrade pip
           pip install python-ldap==3.2.0
@@ -186,6 +198,7 @@ jobs:
         run: |
           sudo cp /path/to/uwsgi.conf /etc/init/uwsgi.conf
         sudo service uwsgi start
+        sudo service uwsgi start
           sudo service uwsgi start
         run: |
           sudo cp /path/to/uwsgi.conf /etc/init/uwsgi.conf
@@ -195,6 +208,7 @@ jobs:
       - name: Configure Nginx
         run: |
           sudo ln -s /etc/nginx/sites-available/vaas.conf /etc/nginx/sites-enabled/vaas.conf
+        sudo service nginx start
         sudo service nginx start
       - name: Troubleshooting
         run:
