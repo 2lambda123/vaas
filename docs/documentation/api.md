@@ -31,7 +31,9 @@ VaaS resources can be previewed under http://<VaaS instance\>/api/v0.1/?format=j
 Authentication methods
 ----------------------
 
-Authentication is required for all requests except schema. There is only one method of authentication: api key. Credentials for this method (i.e. username and api key) can be passed as query params or as http headers. 
+Authentication is required for all requests except schema. There is only one method of authentication: api key. Credentials for this method (i.e. username and api key) can be passed as query params or as http headers. To access VaaS API, first generate API key. Click on *Welcome, \<username\> -> Api Key* to achieve that. 
+
+![Api Key generation](img/api_change_api_key.png) 
 
 To access VaaS API, first generate API key. Click on *Welcome, <username> -> Api Key* to achieve that. 
 
@@ -44,19 +46,19 @@ All examples below can be tested using [VaaS in Vagrant](../quick-start/vagrant.
 
 ###List directors
 
-    curl "http://localhost:3030/api/v0.1/director/?username=admin&api_key=vagrant_api_key"
+    curl "http://<VaaS instance>/api/v0.1/director/?username=admin&api_key=<actual_api_key>"
 
 ###List backends 
 To list backends located in specified DC belonging to specified Director:
 
-    curl "http://localhost:3030/api/v0.1/backend/?director__name=second_service&dc__symbol=dc1&username=admin&api_key=vagrant_api_key"
+    curl "http://<VaaS instance>/api/v0.1/backend/?director__name=second_service&dc__symbol=dc1&username=admin&api_key=<actual_api_key>"
 
 ### Create a new Cluster
 
     curl -X POST \
     -d '{ "name": "cluster1" }' \
     -H "Content-Type: application/json" \
-    "http://localhost:3030/api/v0.1/logical_cluster/?username=admin&api_key=vagrant_api_key" 
+    "http://<VaaS instance>/api/v0.1/logical_cluster/?username=admin&api_key=vagrant_api_key" 
 
 ### Create a new DC
 
@@ -129,7 +131,7 @@ To list backends located in specified DC belonging to specified Director:
       "weight": 1
     }' \
     -H "Content-Type: application/json" \
-    "http://localhost:3030/api/v0.1/backend/1/?username=admin&api_key=vagrant_api_key"
+    "http://<VaaS instance>/api/v0.1/backend/1/?username=admin&api_key=vagrant_api_key"
 
 
 ### Partially update backend
@@ -137,7 +139,7 @@ To list backends located in specified DC belonging to specified Director:
     curl -X PATCH \
     -d '{"address": "192.168.199.33"}' \
     -H "Content-Type: application/json" \
-    "http://localhost:3030/api/v0.1/backend/1/?username=admin&api_key=vagrant_api_key"
+    "http://<VaaS instance>/api/v0.1/backend/1/?username=admin&api_key=api_key_123"
 
 
 ### Create a new Varnish server
@@ -145,11 +147,11 @@ To list backends located in specified DC belonging to specified Director:
     curl -X POST \
     -d '{ "ip": "172.17.0.7", "hostname": "varnish3", "dc": "/api/v0.1/dc/1/", "port": "6082", "secret": "edcf6c52-6f93-4d0d-82b9-cd74239146b0", "template": "/api/v0.1/vcl_template/1/", "cluster": "/api/v0.1/logical_cluster/1/", "enabled": "True" }' \
     -H "Content-Type: application/json" \
-    "http://localhost:3030/api/v0.1/varnish_server/?username=admin&api_key=vagrant_api_key"
+    "http://<VaaS instance>/api/v0.1/varnish_server/?username=user123&api_key=<actual_api_key>"
 
 ### Delete a backend
 
-    curl -i -X DELETE "http://localhost:3030/api/v0.1/backend/1/?username=admin&api_key=vagrant_api_key"
+    curl -i -X DELETE "http://<VaaS instance>/api/v0.1/backend/1/?username=admin&api_key=vagrant_api_key"
  
  
 ### Patch a list of backends
@@ -198,7 +200,7 @@ To list backends located in specified DC belonging to specified Director:
     curl -X POST \
     -d '{ "url": "http://example.com/contact", "clusters": "cluster1_siteA_test"  }' \
     -H "Content-Type: application/json" \
-    "http://localhost:3030/api/v0.1/purger/?username=admin&api_key=vagrant_api_key"
+    "http://<VaaS instance>/api/v0.1/purger/?username=admin&api_key=vagrant_api_key"
 
 ### Purge object from varnishes from a given cluster with additional request headers (in case of multiple objects in cache because of HTTP Vary header).
 ### VaaS will generate HTTP purge requests for all possible combinations from given headers.
@@ -206,7 +208,7 @@ To list backends located in specified DC belonging to specified Director:
     curl -X POST \
     -d '{ "url": "http://example.com/contact", "clusters": "cluster1_siteA_test", "headers": {"header1": ["val1", "val2"], "header2": ["val1", "val2"]}  }' \
     -H "Content-Type: application/json" \
-    "http://localhost:3030/api/v0.1/purger/?username=admin&api_key=vagrant_api_key"
+    "http://<VaaS instance>/api/v0.1/purger/?username=user123&api_key=vagrant_api_key"
 
 
 ### List outdated servers from single logical cluster
