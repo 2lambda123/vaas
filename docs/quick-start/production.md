@@ -164,7 +164,7 @@ If you cannot create virtualenv on Ubuntu 16.04 and have error like this:
     available.  On Debian/Ubuntu systems, you need to install the python3-venv
     package using the following command.
 
-        apt-get install python3-venv
+        apt-get install python3-venv python3-dev
 
     You may need to use sudo with that command.  After installing the python3-venv
     package, recreate your virtual environment.
