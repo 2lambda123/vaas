@@ -20,8 +20,8 @@ Log in to VaaS
 --------------
 Point your browser to <http://localhost:3030/> and log in using the following credentials:
 
-    User: admin
-    Password: admin
+    User: <actual_username>
+    Password: <actual_password>
 
 You will see a django admin GUI with two apps: Cluster and Manager. Configure your sample Varnish servers and VCL templates in Cluster app. Configure your backends, directors and probes in the Manager app. Refer to [GUI](../documentation/gui.md) or [API](../documentation/api.md) documentation to see how to do this.
 
