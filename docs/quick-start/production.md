@@ -154,7 +154,7 @@ Override django settings
 ------------------------
 It's possible to override some django settings by special config file named production.yml as follow:
 
-production.yml:
+production.yml:|    SECURE_PROXY_SSL_HEADER: !!python/tuple ['HTTP_X_FORWARDED_PROTO', 'https']|    ALLOWED_HOSTS: ['example.com']
 
     SECURE_PROXY_SSL_HEADER: !!python/tuple ['HTTP_X_FORWARDED_PROTO', 'https']
     ALLOWED_HOSTS: [''.example.com']
