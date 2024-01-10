@@ -131,7 +131,7 @@ To list backends located in specified DC belonging to specified Director:
       "weight": 1
     }' \
     -H "Content-Type: application/json" \
-    "http://localhost:3030/api/v0.1/backend/1/?username=admin&api_key=vagrant_api_key"
+    "http://<VaaS instance>/api/v0.1/backend/1/?username=admin&api_key=vagrant_api_key"
 
 
 ### Partially update backend
