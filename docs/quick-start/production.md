@@ -171,10 +171,14 @@ If you cannot create virtualenv on Ubuntu 16.04 and have error like this:
 
     Failing command: ['/tmp/vaas/dist-venv/bin/python3.5', '-Im', 'ensurepip', '--upgrade', '--default-pip']
 
-You need to update your locale. For example:
+To update your locale, use the following commands:
 
     export LC_ALL="en_US.UTF-8"
     export LC_CTYPE="en_US.UTF-8"
     sudo dpkg-reconfigure locales
 
-After that commend ```sudo python3.5 -m venv dist-venv``` will work properly.
+After that, the command ```sudo python3.5 -m venv dist-venv``` will work properly:
+
+    export LC_ALL="en_US.UTF-8"
+    export LC_CTYPE="en_US.UTF-8"
+    sudo dpkg-reconfigure locales
