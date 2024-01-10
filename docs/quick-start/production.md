@@ -4,7 +4,7 @@ VaaS is a Django application. It can be run in multiple ways, as documented in [
 
 Python Support
 --------------
-VaaS run on Python3.5+ versions.
+VaaS run on Python3.8+ versions.
 
 Ubuntu system packages requirements
 -----------------------------------
@@ -17,7 +17,7 @@ Build VaaS package
 Use the commands below to build VaaS from source:
 
     git clone https://github.com/allegro/vaas.git
-    python3.5 -m venv dist-env
+    python3.8 -m venv dist-env
     . dist-env/bin/activate
     pip install --upgrade pip
     cd vaas/vaas-app
@@ -35,8 +35,8 @@ Use the commands below to install VaaS package built in the previous step on a w
     . prod-env/bin/activate
     pip install --upgrade pip
     pip install python-ldap==3.2.0
-    pip install django-auth-ldap==1.7.0
-    pip install mysqlclient==1.4.2.post1
+    pip install django-auth-ldap==1.9.0
+    pip install mysqlclient==1.5.0
     pip install lck.django
     pip install uwsgi
     pip install vaas-{version-number}.zip
@@ -44,7 +44,7 @@ Use the commands below to install VaaS package built in the previous step on a w
 
 Configure Mysql
 ---------------
-Install Mysql server and create a new database and user for VaaS.
+Install Mysql server, create a new database, and a new user for VaaS.
 
 
 VaaS configuration location
@@ -91,7 +91,7 @@ Then start uwsgi with:
 
 Configure Service
 -----------------
-For modern OS we use Systemd service for mange UWsgi. Create service file /lib/systemd/system/vaas_uwsgi.service with the following contents:
+For modern OS, we use the Systemd service to manage Uwsgi. Create service file /lib/systemd/system/vaas_uwsgi.service with the following contents:
 
     [Unit]
     Description=Varnish As A Service
@@ -117,7 +117,7 @@ Run VaaS:
 
 Configure Nginx (Modifying Nginx Configuration)
 ---------------
-Create a file in /etc/nginx/sites-available/vaas.conf and link it to /etc/nginx/sites-enabled. Add the following contents to the file replacing SERVER_NAME with your server name:
+Create a file named vaas.conf in /etc/nginx/sites-available and link it to /etc/nginx/sites-enabled. Add the following contents to the file replacing SERVER_NAME with your server name:
 
     upstream django {
         server unix:///tmp/vaas.sock;
@@ -169,7 +169,7 @@ If you cannot create virtualenv on Ubuntu 16.04 and have error like this:
     You may need to use sudo with that command.  After installing the python3-venv
     package, recreate your virtual environment.
 
-    Failing command: ['/tmp/vaas/dist-venv/bin/python3.5', '-Im', 'ensurepip', '--upgrade', '--default-pip']
+    Failing command: ['/tmp/vaas/dist-venv/bin/python3.8', '-Im', 'ensurepip', '--upgrade', '--default-pip']
 
 You need to update your locale. For example:
 
