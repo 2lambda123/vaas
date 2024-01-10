@@ -86,7 +86,7 @@ One way to run Uwsgi is to configure it with upstart. Create a file called /etc/
 
 Then start uwsgi with:
 
-    service uwsgi start
+    service vaas start
 
 
 Configure Service
@@ -98,7 +98,7 @@ For modern OS we use Systemd service for mange UWsgi. Create service file /lib/s
     After=network.target
 
     [Service]
-    ExecStart=//home/vagrant/prod-env/bin/uwsgi --env DJANGO_SETTINGS_MODULE=vaas.settings --uid vagrant --master --processes 8 --die-on-term --socket /tmp/vaas.sock -H /home/vagrant/prod-env --module vaas.external.wsgi --chmod-socket=666 --logto /tmp/uwsgi.log
+    ExecStart=service vaas start
     Restart=on-failure
     Type=notify
 
@@ -117,13 +117,13 @@ Run VaaS:
 
 Configure Nginx
 ---------------
-Create a file in /etc/nginx/sites-available/vaas.conf and link it to /etc/nginx/sites-enabled. Add the following contents to the file replacing SERVER_NAME with your server name:
+See vaas.conf for the correct Nginx configuration.
 
     upstream django {
         server unix:///tmp/vaas.sock;
     }
     
-    server {
+    Nginx server configuration as defined in vaas.conf.
         listen      80;
         server_name <SERVER_NAME>;
         charset     utf-8;
