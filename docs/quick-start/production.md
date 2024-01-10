@@ -39,7 +39,7 @@ Use the commands below to install VaaS package built in the previous step on a w
     pip install mysqlclient==1.4.2.post1
     pip install lck.django
     pip install uwsgi
-    pip install vaas-{version-number}.zip
+    pip install vaas-1.2.3.zip
 
 
 Configure Mysql
