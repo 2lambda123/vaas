@@ -68,9 +68,9 @@ To list backends located in specified DC belonging to specified Director:
 ### Create a new VCL template
 
     curl -X POST \
-    -d '{ "version": "4.0", "content": "<VCL/>", "name": "vcl_template_4" }' \
+    -d '{ "version": "5.0", "content": "<new_VCL/>", "name": "desired_vcl_template" }' \
     -H "Content-Type: application/json" \
-    "http://localhost:3030/api/v0.1/vcl_template/?username=admin&api_key=vagrant_api_key"
+    "http://localhost:3030/api/v0.1/vcl_template/?username=admin&api_key=actual_api_key"
 
 ### Create a new Probe
 
