@@ -1,10 +1,18 @@
-Configuring VaaS in production environment
+Configuring VaaS for deployment in the production environment
+
+---
+
+## Deploying with GitHub Actions
+
+GitHub Actions is a powerful tool for automating your software development workflows. With GitHub Actions, you can build, test, and deploy your code directly from GitHub. If you are looking to deploy VaaS using GitHub Actions, you can find detailed instructions in the [GitHub Actions Documentation](docs/quick-start/github_actions.md).
 ==========================================
 VaaS is a Django application. It can be run in multiple ways, as documented in [Django deployment documentation](https://docs.djangoproject.com/en/1.8/howto/deployment/). The example below is just one way of deploying VaaS. It uses Uwsgi, Nginx and Mysql on an Ubuntu server, as ubuntu user.
 
 Python Support
 --------------
 VaaS run on Python3.8+ versions.
+
+Please refer to [GitHub Actions Documentation](docs/quick-start/github_actions.md) for more information on deploying VaaS using GitHub Actions.
 
 Ubuntu system packages requirements
 -----------------------------------
