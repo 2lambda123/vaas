@@ -82,7 +82,11 @@ One way to run Uwsgi is to configure it with upstart. Create a file called /etc/
     start on runlevel [2345]
     stop on runlevel [06]
     
-    exec /home/vagrant/prod-env/bin/uwsgi --env DJANGO_SETTINGS_MODULE=vaas.settings --uid vagrant --master --processes 8 --die-on-term --socket /tmp/vaas.sock -H /home/vagrant/prod-env --module vaas.external.wsgi --chmod-socket=666 --logto /tmp/uwsgi.log
+    description "Vaas - Varnish Configuration"
+start on runlevel [2345]
+stop on runlevel [06]
+
+exec /home/vagrant/prod-env/bin/uwsgi --env DJANGO_SETTINGS_MODULE=vaas.settings --uid vagrant --master --processes 8 --die-on-term --socket /tmp/vaas.sock -H /home/vagrant/prod-env --module vaas.external.wsgi --chmod-socket=666 --logto /tmp/uwsgi.log
 
 Then start uwsgi with:
 
@@ -98,7 +102,7 @@ For modern OS we use Systemd service for mange UWsgi. Create service file /lib/s
     After=network.target
 
     [Service]
-    ExecStart=//home/vagrant/prod-env/bin/uwsgi --env DJANGO_SETTINGS_MODULE=vaas.settings --uid vagrant --master --processes 8 --die-on-term --socket /tmp/vaas.sock -H /home/vagrant/prod-env --module vaas.external.wsgi --chmod-socket=666 --logto /tmp/uwsgi.log
+    ExecStart=/home/vagrant/prod-env/bin/uwsgi --env DJANGO_SETTINGS_MODULE=vaas.settings --uid vagrant --master --processes 8 --die-on-term --socket /tmp/vaas.sock -H /home/vagrant/prod-env --module vaas.external.wsgi --chmod-socket=666 --logto /tmp/uwsgi.log
     Restart=on-failure
     Type=notify
 
@@ -125,7 +129,7 @@ Create a file in /etc/nginx/sites-available/vaas.conf and link it to /etc/nginx/
     
     server {
         listen      80;
-        server_name <SERVER_NAME>;
+        server_name my_server_name;
         charset     utf-8;
     
         client_max_body_size 75M;
@@ -150,7 +154,7 @@ Override django settings
 ------------------------
 It's possible to override some django settings by special config file named production.yml as follow:
 
-production.yml:
+production.yml:|    SECURE_PROXY_SSL_HEADER: !!python/tuple ['HTTP_X_FORWARDED_PROTO', 'https']|    ALLOWED_HOSTS: ['example.com']
 
     SECURE_PROXY_SSL_HEADER: !!python/tuple ['HTTP_X_FORWARDED_PROTO', 'https']
     ALLOWED_HOSTS: [''.example.com']
