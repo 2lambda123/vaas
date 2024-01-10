@@ -58,7 +58,7 @@ To list backends located in specified DC belonging to specified Director:
     curl -X POST \
     -d '{ "name": "cluster1" }' \
     -H "Content-Type: application/json" \
-    "http://localhost:3030/api/v0.1/logical_cluster/?username=admin&api_key=vagrant_api_key" 
+    "http://<VaaS instance>/api/v0.1/logical_cluster/?username=admin&api_key=vagrant_api_key" 
 
 ### Create a new DC
 
@@ -139,7 +139,7 @@ To list backends located in specified DC belonging to specified Director:
     curl -X PATCH \
     -d '{"address": "192.168.199.33"}' \
     -H "Content-Type: application/json" \
-    "http://localhost:3030/api/v0.1/backend/1/?username=admin&api_key=vagrant_api_key"
+    "http://<VaaS instance>/api/v0.1/backend/1/?username=admin&api_key=vagrant_api_key"
 
 
 ### Create a new Varnish server
@@ -200,7 +200,7 @@ To list backends located in specified DC belonging to specified Director:
     curl -X POST \
     -d '{ "url": "http://example.com/contact", "clusters": "cluster1_siteA_test"  }' \
     -H "Content-Type: application/json" \
-    "http://localhost:3030/api/v0.1/purger/?username=admin&api_key=vagrant_api_key"
+    "http://<VaaS instance>/api/v0.1/purger/?username=admin&api_key=vagrant_api_key"
 
 ### Purge object from varnishes from a given cluster with additional request headers (in case of multiple objects in cache because of HTTP Vary header).
 ### VaaS will generate HTTP purge requests for all possible combinations from given headers.
