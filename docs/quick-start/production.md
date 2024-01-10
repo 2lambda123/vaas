@@ -4,7 +4,7 @@ VaaS is a Django application. It can be run in multiple ways, as documented in [
 
 Python Support
 --------------
-VaaS run on Python3.5+ versions.
+VaaS run on Python 3.5 and later versions.
 
 Ubuntu system packages requirements
 -----------------------------------
@@ -153,7 +153,7 @@ It's possible to override some django settings by special config file named prod
 production.yml:
 
     SECURE_PROXY_SSL_HEADER: !!python/tuple ['HTTP_X_FORWARDED_PROTO', 'https']
-    ALLOWED_HOSTS: [''.example.com']
+    ALLOWED_HOSTS: ['example.com']
 
 
 Troubleshooting
